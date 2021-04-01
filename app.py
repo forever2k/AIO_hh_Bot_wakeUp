@@ -3,6 +3,25 @@ import os
 from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
 from aiogram.utils.executor import start_webhook
+from selenium import webdriver
+import schedule
+import time
+import ast
+
+
+chrome_options = webdriver.ChromeOptions()
+chrome_options.binary_location = os.environ.get('GOOGLE_CHROME_BIN')
+chrome_options.add_argument('--headless')
+chrome_options.add_argument('--no-sandbox')
+chrome_options.add_argument('--disable-dev-sh-usage')
+
+driver = webdriver.Chrome(executable_path=os.environ.get('CHROMEDRIVER_PATH'), chrome_options=chrome_options)
+driver.implicitly_wait(4)
+
+URL = 'https://hh.ru/'
+
+launch = True
+
 
 TOKEN = os.getenv('TOKEN')
 PROJECT_NAME = os.getenv('PROJECT_NAME')
@@ -15,7 +34,6 @@ WEBAPP_HOST = '0.0.0.0'
 WEBAPP_PORT = os.environ.get('PORT')
 
 
-
 logging.basicConfig(level=logging.INFO)
 
 bot = Bot(token=TOKEN)
@@ -24,33 +42,82 @@ dp = Dispatcher(bot)
 
 @dp.message_handler(commands=['start'])
 async def main_start(message: types.Message):
-    await message.reply(text='бла бла бла', reply=True)
+    await message.answer("Bot hh_wakeUp works")
 
 
-@dp.message_handler(commands=['help'])
-async def send_message(message: types.Message):
-    await message.reply('Привет!\nЯ - эхобот')
-    await main_start(message=message)
+@dp.message_handler(commands=['res'])
+async def res(message: types.Message):
+    await message.answer("RES Bot starts to work")
+
+    start_res()
+    wake_up()
+
+    bot_schedule()
+
+
+@dp.message_handler(commands=['stop'])
+async def stop_res(message: types.Message):
+    global launch
+    launch = False
+    await message.answer("STOP is activated")
+
+
+def start_res():
+
+    global launch
+    launch = True
 
 
 
-#
-# @dp.message_handler(content_types=['text'])
-# async def main_2(message : types.Message):
-#     await bot.send_message(message.from_user.id, 'Приветики ))')
+def wake_up():
+
+    await bot.send_message(227722043, "Function Wake_up starts")
+    driver.get(URL)
+
+    hh_add = os.environ.get('hh')
+
+    testarray = ast.literal_eval(hh_add)
 
 
-@dp.message_handler(content_types=types.ContentTypes.TEXT)
-async def main_text(message: types.Message):
-    text = message.text
-    if text and not text.startswith('/'):
-        await message.reply(text=text)
+    for cook in testarray:
+        driver.add_cookie(cook)
+
+    time.sleep(2)
+    driver.refresh()
+    time.sleep(1)
+
+
+    # cookies = pickle.load(open("session", "rb"))
+    # for cookie in cookies:
+    #     driver.add_cookie(cookie)
+    # driver.refresh()
+
+    ob = driver.find_elements_by_class_name("HH-Supernova-NaviLevel2-Link")
+    ob[0].click()
+
+    ob1 = driver.find_elements_by_class_name('bloko-link_dimmed')
+
+
+    for i in ob1:
+        if i.text == 'Поднять в поиске':
+            try:
+                i.click()
+                await bot.send_message(-1001364950026, 'Подняли! :)')
+            except:
+                await bot.send_message(-1001364950026, 'Что то не подняли :(')
+
+    await bot.send_message(227722043, "Function Wake_up finished")
 
 
 
-@dp.message_handler()
-async def echo(message: types.Message):
-    await bot.send_message(message.chat.id, message.text)
+def bot_schedule():
+    schedule.every(250).minutes.do(wake_up)
+
+    while launch:
+        schedule.run_pending()
+        time.sleep(1)
+
+
 
 
 async def on_startup(dp):
