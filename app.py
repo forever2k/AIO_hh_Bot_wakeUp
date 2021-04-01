@@ -42,12 +42,12 @@ dp = Dispatcher(bot)
 
 @dp.message_handler(commands=['start'])
 async def main_start(message: types.Message):
-    await message.answer("Bot hh_wakeUp works")
+    await message.answer("Bot AIO_hh_wakeUp works")
 
 
 @dp.message_handler(commands=['res'])
 async def res(message: types.Message):
-    await message.answer("RES Bot starts to work")
+    await message.answer("RES AIO_Bot starts to work")
 
     start_res()
     wake_up()
