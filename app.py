@@ -23,6 +23,8 @@ URL = 'https://hh.ru/'
 launch = True
 
 
+
+
 TOKEN = os.getenv('TOKEN')
 PROJECT_NAME = os.getenv('PROJECT_NAME')
 
