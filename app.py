@@ -56,8 +56,8 @@ async def res(message: types.Message):
     # wake_up()
     #
     # bot_schedule()
-    asyncio.run(start_res())
-    asyncio.run(wake_up())
+    # asyncio.run(start_res())
+    asyncio.run(wake_up(message))
     asyncio.run(bot_schedule())
 
 
@@ -76,8 +76,9 @@ async def start_res():
 
 
 
-async def wake_up():
+async def wake_up(message):
 
+    await message.answer("here")
     await bot.send_message(227722043, "Function Wake_up starts")
     driver.get(URL)
 
