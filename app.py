@@ -56,9 +56,10 @@ async def res(message: types.Message):
     # wake_up()
     #
     # bot_schedule()
-    # asyncio.run(start_res())
-    asyncio.run(wake_up(message))
-    asyncio.run(bot_schedule())
+
+    await start_res()
+    await wake_up(message)
+    await bot_schedule()
 
 
 
@@ -90,9 +91,9 @@ async def wake_up(message):
     for cook in testarray:
         driver.add_cookie(cook)
 
-    time.sleep(2)
+    await asyncio.sleep(2)
     driver.refresh()
-    time.sleep(1)
+    await asyncio.sleep(1)
 
 
     # cookies = pickle.load(open("session", "rb"))
@@ -123,7 +124,7 @@ async def bot_schedule():
 
     while launch:
         schedule.run_pending()
-        time.sleep(1)
+        await asyncio.sleep(1)
 
 
 
