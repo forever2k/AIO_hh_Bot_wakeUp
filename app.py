@@ -77,9 +77,8 @@ async def start_res():
 
 
 
-async def wake_up(message):
+async def wake_up():
 
-    await message.answer("here")
     await bot.send_message(227722043, "Function Wake_up starts")
     driver.get(URL)
 
@@ -95,8 +94,6 @@ async def wake_up(message):
     driver.refresh()
     await asyncio.sleep(1)
 
-    await message.answer("here 111")
-
 
     # cookies = pickle.load(open("session", "rb"))
     # for cookie in cookies:
@@ -107,6 +104,8 @@ async def wake_up(message):
     ob[0].click()
 
     ob1 = driver.find_elements_by_class_name('bloko-link_dimmed')
+
+    await bot.send_message(227722043, "here 2222222")
 
 
     for i in ob1:
