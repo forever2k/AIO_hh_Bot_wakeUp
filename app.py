@@ -95,6 +95,8 @@ async def wake_up(message):
     driver.refresh()
     await asyncio.sleep(1)
 
+    await message.answer("here 111")
+
 
     # cookies = pickle.load(open("session", "rb"))
     # for cookie in cookies:
