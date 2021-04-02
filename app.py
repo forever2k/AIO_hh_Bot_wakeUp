@@ -7,6 +7,7 @@ from selenium import webdriver
 import schedule
 import time
 import ast
+import asyncio
 
 
 chrome_options = webdriver.ChromeOptions()
@@ -51,10 +52,14 @@ async def main_start(message: types.Message):
 async def res(message: types.Message):
     await message.answer("RES AIO_Bot starts to work")
 
-    start_res()
-    wake_up()
+    # start_res()
+    # wake_up()
+    #
+    # bot_schedule()
+    asyncio.run(start_res())
+    asyncio.run(wake_up())
+    asyncio.run(bot_schedule())
 
-    bot_schedule()
 
 
 @dp.message_handler(commands=['stop'])
