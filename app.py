@@ -58,7 +58,7 @@ async def res(message: types.Message):
     # bot_schedule()
 
     await start_res()
-    await wake_up(message)
+    await wake_up()
     await bot_schedule()
 
 
