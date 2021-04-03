@@ -57,9 +57,9 @@ async def res(message: types.Message):
     #
     # bot_schedule()
 
-    await start_res()
-    await wake_up()
-    await bot_schedule()
+    start_res()
+    wake_up()
+    bot_schedule()
 
 
 
@@ -70,14 +70,14 @@ async def stop_res(message: types.Message):
     await message.answer("STOP is activated")
 
 
-async def start_res():
+def start_res():
 
     global launch
     launch = True
 
 
 
-async def wake_up():
+def wake_up():
 
     await bot.send_message(227722043, "Function Wake_up starts")
     driver.get(URL)
@@ -120,7 +120,7 @@ async def wake_up():
 
 
 
-async def bot_schedule():
+def bot_schedule():
     schedule.every(250).minutes.do(wake_up)
 
     while launch:
