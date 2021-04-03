@@ -79,7 +79,7 @@ def start_res():
 
 def wake_up():
 
-    await bot.send_message(227722043, "Function Wake_up starts")
+    bot.send_message(227722043, "Function Wake_up starts")
     driver.get(URL)
 
     hh_add = os.environ.get('hh')
@@ -90,9 +90,9 @@ def wake_up():
     for cook in testarray:
         driver.add_cookie(cook)
 
-    await asyncio.sleep(2)
+    time.sleep(2)
     driver.refresh()
-    await asyncio.sleep(1)
+    time.sleep(1)
 
 
     # cookies = pickle.load(open("session", "rb"))
@@ -105,18 +105,16 @@ def wake_up():
 
     ob1 = driver.find_elements_by_class_name('bloko-link_dimmed')
 
-    await bot.send_message(227722043, "here 2222222")
-
 
     for i in ob1:
         if i.text == 'Поднять в поиске':
             try:
                 i.click()
-                await bot.send_message(-1001364950026, 'Подняли! :)')
+                bot.send_message(-1001364950026, 'Подняли! :)')
             except:
-                await bot.send_message(-1001364950026, 'Что то не подняли :(')
+                bot.send_message(-1001364950026, 'Что то не подняли :(')
 
-    await bot.send_message(227722043, "Function Wake_up finished")
+    bot.send_message(227722043, "Function Wake_up finished")
 
 
 
@@ -125,7 +123,7 @@ def bot_schedule():
 
     while launch:
         schedule.run_pending()
-        await asyncio.sleep(1)
+        time.sleep(1)
 
 
 
