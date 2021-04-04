@@ -57,6 +57,14 @@ async def res(message: types.Message):
 
     await start_res()
     await wake_up()
+    # await scheduler()
+
+
+@dp.message_handler(commands=['res2'])
+async def res(message: types.Message):
+    await message.answer("RES2")
+    # await bot.send_message(227722043, "Function Wake_up starts")
+
     await scheduler()
 
 
