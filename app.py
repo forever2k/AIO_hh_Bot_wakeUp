@@ -57,7 +57,7 @@ async def res(message: types.Message):
 
     await start_res()
     await wake_up()
-    # await scheduler()
+    await scheduler()
 
 
 
@@ -114,7 +114,7 @@ async def wake_up():
             except:
                 await bot.send_message(test, 'Что то не подняли :(')
 
-    # await bot.send_message(227722043, "Function Wake_up finished")
+    await bot.send_message(227722043, "Function Wake_up finished")
 
 
 
