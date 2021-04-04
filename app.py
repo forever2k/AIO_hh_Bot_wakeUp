@@ -8,6 +8,7 @@ import schedule
 import time
 import ast
 import asyncio
+import aioschedule
 
 
 chrome_options = webdriver.ChromeOptions()
@@ -19,11 +20,12 @@ chrome_options.add_argument('--disable-dev-sh-usage')
 driver = webdriver.Chrome(executable_path=os.environ.get('CHROMEDRIVER_PATH'), chrome_options=chrome_options)
 driver.implicitly_wait(4)
 
-URL = 'https://hh.ru/'
+URL = os.getenv('URL')
 
 launch = True
 
-
+test_group = -1001153348142
+test = -1001364950026
 
 
 TOKEN = os.getenv('TOKEN')
@@ -37,7 +39,7 @@ WEBAPP_HOST = '0.0.0.0'
 WEBAPP_PORT = os.environ.get('PORT')
 
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG)
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot)
@@ -51,35 +53,33 @@ async def main_start(message: types.Message):
 @dp.message_handler(commands=['res'])
 async def res(message: types.Message):
     await message.answer("RES AIO_Bot starts to work")
+    # await bot.send_message(227722043, "Function Wake_up starts")
 
-    # start_res()
-    # wake_up()
-    #
-    # bot_schedule()
-
-    start_res()
-    wake_up()
-    bot_schedule()
+    await start_res()
+    await wake_up()
+    await scheduler()
 
 
 
 @dp.message_handler(commands=['stop'])
 async def stop_res(message: types.Message):
+
     global launch
     launch = False
-    await message.answer("STOP is activated")
+    await bot.send_message(227722043, "STOP is activated")
 
 
-def start_res():
+
+async def start_res():
 
     global launch
     launch = True
 
 
 
-def wake_up():
+async def wake_up():
 
-    bot.send_message(227722043, "Function Wake_up starts")
+    await bot.send_message(227722043, "Function Wake_up starts")
     driver.get(URL)
 
     hh_add = os.environ.get('hh')
@@ -90,10 +90,9 @@ def wake_up():
     for cook in testarray:
         driver.add_cookie(cook)
 
-    time.sleep(2)
+    await asyncio.sleep(2)
     driver.refresh()
-    time.sleep(1)
-
+    await asyncio.sleep(1)
 
     # cookies = pickle.load(open("session", "rb"))
     # for cookie in cookies:
@@ -105,25 +104,26 @@ def wake_up():
 
     ob1 = driver.find_elements_by_class_name('bloko-link_dimmed')
 
-
     for i in ob1:
         if i.text == 'Поднять в поиске':
             try:
                 i.click()
-                bot.send_message(-1001364950026, 'Подняли! :)')
+                await bot.send_message(test, 'Подняли! :)')
             except:
-                bot.send_message(-1001364950026, 'Что то не подняли :(')
+                await bot.send_message(test, 'Что то не подняли :(')
 
-    bot.send_message(227722043, "Function Wake_up finished")
+    # await bot.send_message(227722043, "Function Wake_up finished")
 
 
 
-def bot_schedule():
-    schedule.every(250).minutes.do(wake_up)
-
-    while launch:
-        schedule.run_pending()
-        time.sleep(1)
+async def scheduler():
+    try:
+        aioschedule.every(3).minutes.do(wake_up)
+        while launch:
+            await aioschedule.run_pending()
+            await asyncio.sleep(1)
+    except Exception as e:
+        await bot.send_message(test, e)
 
 
 

@@ -5,4 +5,4 @@ ujson==4.0.2
 chardet==4.0.0
 schedule==1.0.0
 selenium==3.141.0
-
+aioschedule == 0.5.2
