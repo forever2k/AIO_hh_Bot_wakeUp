@@ -56,7 +56,7 @@ async def res(message: types.Message):
     # await bot.send_message(227722043, "Function Wake_up starts")
 
     await start_res()
-    await wake_up()
+    a = await wake_up()
     # await scheduler()
 
 
@@ -65,7 +65,7 @@ async def res(message: types.Message):
     await message.answer("RES2")
     # await bot.send_message(227722043, "Function Wake_up starts")
 
-    await scheduler()
+    await scheduler2()
 
 
 
@@ -114,19 +114,23 @@ async def wake_up():
 
     ob1 = driver.find_elements_by_class_name('bloko-link_dimmed')
 
+    res = 0
+
     for i in ob1:
         if i.text == 'Поднять в поиске':
             try:
                 i.click()
+                res += 1
                 await bot.send_message(test, 'Подняли! :)')
             except:
+                res += 100
                 await bot.send_message(test, 'Что то не подняли :(')
 
     await bot.send_message(227722043, "Function Wake_up finished")
 
+    return res
 
-
-async def scheduler():
+async def scheduler2():
     try:
         aioschedule.every(3).minutes.do(wake_up)
         while launch:
@@ -150,5 +154,5 @@ async def on_shutdown(dp):
 if __name__ == '__main__':
     start_webhook(dispatcher=dp, webhook_path=WEBHOOK_PATH,
                   on_startup=on_startup, on_shutdown=on_shutdown,
-                  host=WEBAPP_HOST, port=WEBAPP_PORT)
+                  host=WEBAPP_HOST, port=WEBAPP_PORT, skip_updates=True)
 
