@@ -57,7 +57,7 @@ async def res(message: types.Message):
 
     await start_res()
     await wake_up()
-    await scheduler()
+    # await scheduler()
 
 
 
@@ -74,6 +74,8 @@ async def start_res():
 
     global launch
     launch = True
+
+    await bot.send_message(227722043, "launch is True")
 
 
 
