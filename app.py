@@ -57,6 +57,7 @@ async def res(message: types.Message):
 
     await start_res()
     a = await wake_up()
+    await bot.send_message(227722043, f"Function Wake_up finished, result: {a}")
     # await scheduler()
 
 
@@ -65,7 +66,7 @@ async def res(message: types.Message):
     await message.answer("RES2")
     # await bot.send_message(227722043, "Function Wake_up starts")
 
-    await scheduler2()
+    # await scheduler2()
 
 
 
@@ -126,18 +127,18 @@ async def wake_up():
                 res += 100
                 await bot.send_message(test, 'Что то не подняли :(')
 
-    await bot.send_message(227722043, "Function Wake_up finished")
 
     return res
 
-async def scheduler2():
-    try:
-        aioschedule.every(3).minutes.do(wake_up)
-        while launch:
-            await aioschedule.run_pending()
-            await asyncio.sleep(1)
-    except Exception as e:
-        await bot.send_message(test, e)
+
+# async def scheduler():
+#     try:
+#         aioschedule.every(3).minutes.do(wake_up)
+#         while launch:
+#             await aioschedule.run_pending()
+#             await asyncio.sleep(1)
+#     except Exception as e:
+#         await bot.send_message(test, e)
 
 
 
