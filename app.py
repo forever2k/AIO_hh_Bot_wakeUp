@@ -79,6 +79,15 @@ async def res(message: types.Message):
 
 
 
+@dp.message_handler(commands=['res4'])
+async def res(message: types.Message):
+    # await message.answer("RES3")
+    # await bot.send_message(227722043, "Function Wake_up starts")
+
+    await scheduler2()
+
+
+
 @dp.message_handler(commands=['stop'])
 async def stop_res(message: types.Message):
 
@@ -140,14 +149,59 @@ async def wake_up():
     return res
 
 
-async def scheduler():
-    try:
-        aioschedule.every(2).minutes.do(wake_up)
-        while launch:
-            await aioschedule.run_pending()
-            await asyncio.sleep(1)
-    except Exception as e:
-        await bot.send_message(test, e)
+
+async def wake_up2():
+
+    await bot.send_message(227722043, "Function Wake_up starts")
+    driver.get(URL)
+
+    hh_add = os.environ.get('hh')
+
+    testarray = ast.literal_eval(hh_add)
+
+
+    for cook in testarray:
+        driver.add_cookie(cook)
+
+    await asyncio.sleep(2)
+    driver.refresh()
+    await asyncio.sleep(1)
+
+    # cookies = pickle.load(open("session", "rb"))
+    # for cookie in cookies:
+    #     driver.add_cookie(cookie)
+    # driver.refresh()
+
+    ob = driver.find_elements_by_class_name("HH-Supernova-NaviLevel2-Link")
+    ob[0].click()
+
+    ob1 = driver.find_elements_by_class_name('bloko-link_dimmed')
+
+    res = 0
+
+    for i in ob1:
+        if i.text == 'Поднять в поиске':
+            try:
+                i.click()
+                res += 1
+                await bot.send_message(test, 'Подняли! :)')
+            except:
+                res += 100
+                await bot.send_message(test, 'Что то не подняли :(')
+
+
+    return res
+
+
+
+# async def scheduler():
+#     try:
+#         aioschedule.every(2).minutes.do(wake_up)
+#         while launch:
+#             await aioschedule.run_pending()
+#             await asyncio.sleep(1)
+#     except Exception as e:
+#         await bot.send_message(test, e)
 
 
 # async def scheduler():
@@ -156,6 +210,22 @@ async def scheduler():
 #     while True:
 #         loop.run_until_complete(aioschedule.run_pending())
 #         await asyncio.sleep(1)
+
+
+
+loop = asyncio.new_event_loop()
+asyncio.set_event_loop(loop)
+
+
+async def scheduler2():
+    aioschedule.every(2).minutes.do(wake_up2)
+
+    while True:
+        await aioschedule.run_pending()
+        await asyncio.sleep(1)
+
+
+
 
 
 
