@@ -70,6 +70,15 @@ async def res(message: types.Message):
 
 
 
+@dp.message_handler(commands=['res3'])
+async def res(message: types.Message):
+    await message.answer("RES3")
+    # await bot.send_message(227722043, "Function Wake_up starts")
+
+    dp.loop.create_task(scheduler())
+
+
+
 @dp.message_handler(commands=['stop'])
 async def stop_res(message: types.Message):
 
