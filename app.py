@@ -84,7 +84,7 @@ async def res(message: types.Message):
     # await message.answer("RES3")
     # await bot.send_message(227722043, "Function Wake_up starts")
 
-    await scheduler2()
+    await scheduler()
 
 
 
@@ -194,14 +194,14 @@ async def wake_up2():
 
 
 
-# async def scheduler():
-#     try:
-#         aioschedule.every(2).minutes.do(wake_up)
-#         while launch:
-#             await aioschedule.run_pending()
-#             await asyncio.sleep(1)
-#     except Exception as e:
-#         await bot.send_message(test, e)
+async def scheduler():
+    try:
+        aioschedule.every(2).minutes.do(wake_up)
+        while launch:
+            await aioschedule.run_pending()
+            await asyncio.sleep(1)
+    except Exception as e:
+        await bot.send_message(test, e)
 
 
 # async def scheduler():
@@ -213,17 +213,17 @@ async def wake_up2():
 
 
 
-loop = asyncio.new_event_loop()
-asyncio.set_event_loop(loop)
-
-
-async def scheduler2():
-    aioschedule.every(2).minutes.do(wake_up2)
-
-    while True:
-        await aioschedule.run_pending()
-        await asyncio.sleep(1)
-
+# loop = asyncio.new_event_loop()
+# asyncio.set_event_loop(loop)
+#
+#
+# async def scheduler2():
+#     aioschedule.every(2).minutes.do(wake_up2)
+#
+#     while True:
+#         await aioschedule.run_pending()
+#         await asyncio.sleep(1)
+#
 
 
 
@@ -233,6 +233,7 @@ async def scheduler2():
 async def on_startup(dp):
     logging.warning('Starting connection')
     await bot.set_webhook(WEBHOOK_URL)
+    asyncio.create_task(scheduler())
 
 
 async def on_shutdown(dp):
