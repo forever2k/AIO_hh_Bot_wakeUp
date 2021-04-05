@@ -131,14 +131,22 @@ async def wake_up():
     return res
 
 
+# async def scheduler():
+#     try:
+#         aioschedule.every(4).minutes.do(wake_up)
+#         while launch:
+#             await aioschedule.run_pending()
+#             await asyncio.sleep(1)
+#     except Exception as e:
+#         await bot.send_message(test, e)
+
+
 async def scheduler():
-    try:
-        aioschedule.every(4).minutes.do(wake_up)
-        while launch:
-            await aioschedule.run_pending()
-            await asyncio.sleep(1)
-    except Exception as e:
-        await bot.send_message(test, e)
+    aioschedule.every(4).minutes.do(wake_up)
+    loop = asyncio.get_event_loop()
+    while True:
+        loop.run_until_complete(aioschedule.run_pending())
+        await asyncio.sleep(1)
 
 
 
