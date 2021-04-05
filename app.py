@@ -72,10 +72,10 @@ async def res(message: types.Message):
 
 @dp.message_handler(commands=['res3'])
 async def res(message: types.Message):
-    await message.answer("RES3")
+    # await message.answer("RES3")
     # await bot.send_message(227722043, "Function Wake_up starts")
 
-    dp.loop.create_task(scheduler())
+    await scheduler()
 
 
 
@@ -140,22 +140,22 @@ async def wake_up():
     return res
 
 
-# async def scheduler():
-#     try:
-#         aioschedule.every(4).minutes.do(wake_up)
-#         while launch:
-#             await aioschedule.run_pending()
-#             await asyncio.sleep(1)
-#     except Exception as e:
-#         await bot.send_message(test, e)
-
-
 async def scheduler():
-    aioschedule.every(4).minutes.do(wake_up)
-    loop = asyncio.get_event_loop()
-    while True:
-        loop.run_until_complete(aioschedule.run_pending())
-        await asyncio.sleep(1)
+    try:
+        aioschedule.every(2).minutes.do(wake_up)
+        while launch:
+            await aioschedule.run_pending()
+            await asyncio.sleep(1)
+    except Exception as e:
+        await bot.send_message(test, e)
+
+
+# async def scheduler():
+#     aioschedule.every(4).minutes.do(wake_up)
+#     loop = asyncio.get_event_loop()
+#     while True:
+#         loop.run_until_complete(aioschedule.run_pending())
+#         await asyncio.sleep(1)
 
 
 
