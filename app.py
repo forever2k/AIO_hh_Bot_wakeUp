@@ -63,7 +63,7 @@ async def res(message: types.Message):
 
 @dp.message_handler(commands=['res2'])
 async def res(message: types.Message):
-    # await message.answer("RES2")
+    await message.answer("RES2")
     # await bot.send_message(227722043, "Function Wake_up starts")
 
     # try:
@@ -74,10 +74,10 @@ async def res(message: types.Message):
     # except Exception as e:
     #     await bot.send_message(test, e)
 
-    aioschedule.every(2).minutes.do(wake_up)
-    while launch:
-        await aioschedule.run_pending()
-        await asyncio.sleep(1)
+    # aioschedule.every(2).minutes.do(wake_up)
+    # while launch:
+    #     await aioschedule.run_pending()
+    #     await asyncio.sleep(1)
 
 
 
@@ -185,6 +185,11 @@ async def on_startup(dp):
     logging.warning('Starting connection')
     await bot.set_webhook(WEBHOOK_URL)
     # asyncio.create_task(scheduler())
+
+    aioschedule.every(2).minutes.do(wake_up)
+    while launch:
+        await aioschedule.run_pending()
+        await asyncio.sleep(1)
 
 
 async def on_shutdown(dp):
