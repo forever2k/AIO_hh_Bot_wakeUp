@@ -66,13 +66,18 @@ async def res(message: types.Message):
     # await message.answer("RES2")
     # await bot.send_message(227722043, "Function Wake_up starts")
 
-    try:
-        aioschedule.every(2).minutes.do(wake_up)
-        while launch:
-            await aioschedule.run_pending()
-            await asyncio.sleep(1)
-    except Exception as e:
-        await bot.send_message(test, e)
+    # try:
+    #     aioschedule.every(2).minutes.do(wake_up)
+    #     while launch:
+    #         await aioschedule.run_pending()
+    #         await asyncio.sleep(1)
+    # except Exception as e:
+    #     await bot.send_message(test, e)
+
+    aioschedule.every(2).minutes.do(wake_up)
+    while launch:
+        await aioschedule.run_pending()
+        await asyncio.sleep(1)
 
 
 
@@ -122,21 +127,20 @@ async def wake_up():
 
     ob1 = driver.find_elements_by_class_name('bloko-link_dimmed')
 
-    res = 0
+    # res = 0
 
     for i in ob1:
         if i.text == 'Поднять в поиске':
             try:
                 i.click()
-                res += 1
+                # res += 1
                 await bot.send_message(test, 'Подняли! :)')
             except:
-                res += 100
+                # res += 100
                 await bot.send_message(test, 'Что то не подняли :(')
 
 
-    return res
-
+    return True
 
 
 
