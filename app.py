@@ -81,7 +81,7 @@ async def res22(message: types.Message):
 
     # await bot_schedule()
     # asyncio.run(bot_schedule())
-    func_launch()
+    bot_schedule()
 
 
     await message.answer("RES 22222222222")
@@ -201,17 +201,14 @@ async def wake_up():
 #         time.sleep(1)
 
 
-async def bot_schedule():
-    aioschedule.every(60).seconds.do(wake_up)
+
+
+def bot_schedule():
+    schedule.every(60).seconds.do(wake_up)
 
     while launch:
-        await aioschedule.run_pending()
-        await asyncio.sleep(1)
-
-
-def func_launch():
-    asyncio.run(bot_schedule())
-
+        schedule.run_pending()
+        time.sleep(1)
 
 
 
@@ -219,8 +216,6 @@ def func_launch():
 async def on_startup(dp):
     logging.warning('Starting connection')
     await bot.set_webhook(WEBHOOK_URL)
-
-    # asyncio.run(bot_schedule())
 
     # dp.loop.create_task(scheduler())
     # asyncio.create_task(scheduler())
