@@ -81,7 +81,7 @@ async def res22(message: types.Message):
 
     # await bot_schedule()
     # asyncio.run(bot_schedule())
-    await bot_schedule()
+    bot_schedule()
 
 
     await message.answer("RES 22222222222")
