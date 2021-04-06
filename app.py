@@ -49,166 +49,166 @@ dp = Dispatcher(bot)
 async def main_start(message: types.Message):
     await message.answer("Bot AIO_hh_wakeUp works")
 
-#
-# @dp.message_handler(commands=['res'])
-# async def res(message: types.Message):
-#     await message.answer("RES AIO_Bot starts to work")
-#     # await bot.send_message(227722043, "Function Wake_up starts")
-#
-#     await start_res()
-#     a = await wake_up()
-#     await bot.send_message(227722043, f"Function Wake_up finished, result: {a}")
-#     # await scheduler()
-#
-#
-# @dp.message_handler(commands=['res2'])
-# async def res22(message: types.Message):
-#     await message.answer("RES 2")
-#     # await bot.send_message(227722043, "Function Wake_up starts")
-#
-#     # try:
-#     #     aioschedule.every(2).minutes.do(wake_up)
-#     #     while launch:
-#     #         await aioschedule.run_pending()
-#     #         await asyncio.sleep(1)
-#     # except Exception as e:
-#     #     await bot.send_message(test, e)
-#
-#     # aioschedule.every(2).minutes.do(wake_up)
-#     # while launch:
-#     #     await aioschedule.run_pending()
-#     #     await asyncio.sleep(1)
-#
-#     # await bot_schedule()
-#     # asyncio.run(bot_schedule())
-#     bot_schedule()
-#
-#
-#     await message.answer("RES 22222222222")
-#
-#
-#
-#
-#
-#
-#
-# @dp.message_handler(commands=['stop'])
-# async def stop_res(message: types.Message):
-#
-#     global launch
-#     launch = False
-#     await bot.send_message(227722043, "STOP is activated")
-#
-#
-#
-# async def start_res():
-#
-#     global launch
-#     launch = True
-#
-#     await bot.send_message(227722043, "launch is True")
-#
-#
-#
-# async def wake_up():
-#
-#     await bot.send_message(227722043, "Function Wake_up starts")
-#     driver.get(URL)
-#
-#     hh_add = os.environ.get('hh')
-#
-#     testarray = ast.literal_eval(hh_add)
-#
-#
-#     for cook in testarray:
-#         driver.add_cookie(cook)
-#
-#     await asyncio.sleep(2)
-#     driver.refresh()
-#     await asyncio.sleep(1)
-#
-#     # cookies = pickle.load(open("session", "rb"))
-#     # for cookie in cookies:
-#     #     driver.add_cookie(cookie)
-#     # driver.refresh()
-#
-#     ob = driver.find_elements_by_class_name("HH-Supernova-NaviLevel2-Link")
-#     ob[0].click()
-#
-#     ob1 = driver.find_elements_by_class_name('bloko-link_dimmed')
-#
-#     # res = 0
-#
-#     for i in ob1:
-#         if i.text == 'Поднять в поиске':
-#             try:
-#                 i.click()
-#                 # res += 1
-#                 await bot.send_message(test, 'Подняли! :)')
-#             except:
-#                 # res += 100
-#                 await bot.send_message(test, 'Что то не подняли :(')
-#
-#
-#     return True
-#
-#
-#
-#
-# # async def scheduler():
-# #     try:
-# #         aioschedule.every(2).minutes.do(wake_up)
-# #         while launch:
-# #             await aioschedule.run_pending()
-# #             await asyncio.sleep(1)
-# #     except Exception as e:
-# #         await bot.send_message(test, e)
-#
-#
-# # async def scheduler():
-# #     aioschedule.every(4).minutes.do(wake_up)
-# #     loop = asyncio.get_event_loop()
-# #     while True:
-# #         loop.run_until_complete(aioschedule.run_pending())
-# #         await asyncio.sleep(1)
-#
-#
-#
-# # loop = asyncio.new_event_loop()
-# # asyncio.set_event_loop(loop)
-# #
-# #
-# # async def scheduler():
-# #     aioschedule.every(2).minutes.do(wake_up)
-# #
-# #     while launch:
-# #         await aioschedule.run_pending()
-# #         await asyncio.sleep(2)
-#
-# # async def do_schedule():
-# #     schedule.every(2).minutes.do(wake_up)
-# #
-# #     while launch:
-# #         schedule.run_pending()
-# #         time.sleep(1)
+
+@dp.message_handler(commands=['res'])
+async def res(message: types.Message):
+    await message.answer("RES AIO_Bot starts to work")
+    # await bot.send_message(227722043, "Function Wake_up starts")
+
+    await start_res()
+    a = await wake_up()
+    await bot.send_message(227722043, f"Function Wake_up finished, result: {a}")
+    # await scheduler()
+
+
+@dp.message_handler(commands=['res2'])
+async def res22(message: types.Message):
+    await message.answer("RES 2")
+    # await bot.send_message(227722043, "Function Wake_up starts")
+
+    # try:
+    #     aioschedule.every(2).minutes.do(wake_up)
+    #     while launch:
+    #         await aioschedule.run_pending()
+    #         await asyncio.sleep(1)
+    # except Exception as e:
+    #     await bot.send_message(test, e)
+
+    # aioschedule.every(2).minutes.do(wake_up)
+    # while launch:
+    #     await aioschedule.run_pending()
+    #     await asyncio.sleep(1)
+
+    # await bot_schedule()
+    # asyncio.run(bot_schedule())
+    await bot_schedule()
+
+
+    await message.answer("RES 22222222222")
+
+
+
+
+
+
+
+@dp.message_handler(commands=['stop'])
+async def stop_res(message: types.Message):
+
+    global launch
+    launch = False
+    await bot.send_message(227722043, "STOP is activated")
+
+
+
+async def start_res():
+
+    global launch
+    launch = True
+
+    await bot.send_message(227722043, "launch is True")
+
+
+
+async def wake_up():
+
+    await bot.send_message(227722043, "Function Wake_up starts")
+    driver.get(URL)
+
+    hh_add = os.environ.get('hh')
+
+    testarray = ast.literal_eval(hh_add)
+
+
+    for cook in testarray:
+        driver.add_cookie(cook)
+
+    await asyncio.sleep(2)
+    driver.refresh()
+    await asyncio.sleep(1)
+
+    # cookies = pickle.load(open("session", "rb"))
+    # for cookie in cookies:
+    #     driver.add_cookie(cookie)
+    # driver.refresh()
+
+    ob = driver.find_elements_by_class_name("HH-Supernova-NaviLevel2-Link")
+    ob[0].click()
+
+    ob1 = driver.find_elements_by_class_name('bloko-link_dimmed')
+
+    # res = 0
+
+    for i in ob1:
+        if i.text == 'Поднять в поиске':
+            try:
+                i.click()
+                # res += 1
+                await bot.send_message(test, 'Подняли! :)')
+            except:
+                # res += 100
+                await bot.send_message(test, 'Что то не подняли :(')
+
+
+    # return True
+
+
+
+
+# async def scheduler():
+#     try:
+#         aioschedule.every(2).minutes.do(wake_up)
+#         while launch:
+#             await aioschedule.run_pending()
+#             await asyncio.sleep(1)
+#     except Exception as e:
+#         await bot.send_message(test, e)
+
+
+# async def scheduler():
+#     aioschedule.every(4).minutes.do(wake_up)
+#     loop = asyncio.get_event_loop()
+#     while True:
+#         loop.run_until_complete(aioschedule.run_pending())
+#         await asyncio.sleep(1)
+
+
+
+# loop = asyncio.new_event_loop()
+# asyncio.set_event_loop(loop)
 #
 #
-# # async def bot_schedule():
-# #     schedule.every(2).minutes.do(wake_up)
-# #
-# #     while launch:
-# #         schedule.run_pending()
-# #         time.sleep(1)
+# async def scheduler():
+#     aioschedule.every(2).minutes.do(wake_up)
 #
-#
-#
-#
-# def bot_schedule():
-#     schedule.every(60).seconds.do(wake_up)
+#     while launch:
+#         await aioschedule.run_pending()
+#         await asyncio.sleep(2)
+
+# async def do_schedule():
+#     schedule.every(2).minutes.do(wake_up)
 #
 #     while launch:
 #         schedule.run_pending()
 #         time.sleep(1)
+
+
+# async def bot_schedule():
+#     schedule.every(2).minutes.do(wake_up)
+#
+#     while launch:
+#         schedule.run_pending()
+#         time.sleep(1)
+
+
+
+
+def bot_schedule():
+    schedule.every(60).seconds.do(wake_up)
+
+    while launch:
+        schedule.run_pending()
+        time.sleep(1)
 
 
 
