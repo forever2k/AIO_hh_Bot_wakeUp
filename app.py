@@ -81,6 +81,8 @@ async def res(message: types.Message):
 
     # await bot_schedule()
     # asyncio.run(bot_schedule())
+    func_launch()
+
 
     await message.answer("RES 22222222222")
 
@@ -206,6 +208,9 @@ async def bot_schedule():
         await aioschedule.run_pending()
         await asyncio.sleep(1)
 
+
+def func_launch():
+    asyncio.run(bot_schedule())
 
 
 
