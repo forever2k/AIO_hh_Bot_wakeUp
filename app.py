@@ -168,13 +168,13 @@ async def wake_up():
 # asyncio.set_event_loop(loop)
 #
 #
-# async def scheduler2():
-#     aioschedule.every(2).minutes.do(wake_up2)
-#
-#     while True:
-#         await aioschedule.run_pending()
-#         await asyncio.sleep(1)
-#
+async def scheduler():
+    aioschedule.every(2).minutes.do(wake_up)
+
+    while launch:
+        await aioschedule.run_pending()
+        await asyncio.sleep(2)
+
 
 
 
@@ -184,12 +184,14 @@ async def wake_up():
 async def on_startup(dp):
     logging.warning('Starting connection')
     await bot.set_webhook(WEBHOOK_URL)
+
+    dp.loop.create_task(scheduler())
     # asyncio.create_task(scheduler())
 
-    aioschedule.every(2).minutes.do(wake_up)
-    while launch:
-        await aioschedule.run_pending()
-        await asyncio.sleep(1)
+    # aioschedule.every(2).minutes.do(wake_up)
+    # while launch:
+    #     await aioschedule.run_pending()
+    #     await asyncio.sleep(1)
 
 
 async def on_shutdown(dp):
