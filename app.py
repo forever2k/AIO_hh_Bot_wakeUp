@@ -63,7 +63,7 @@ async def res(message: types.Message):
 
 @dp.message_handler(commands=['res2'])
 async def res(message: types.Message):
-    await message.answer("RES2")
+    await message.answer("RES 2")
     # await bot.send_message(227722043, "Function Wake_up starts")
 
     # try:
@@ -79,7 +79,13 @@ async def res(message: types.Message):
     #     await aioschedule.run_pending()
     #     await asyncio.sleep(1)
 
-    await bot_schedule()
+    # await bot_schedule()
+    asyncio.run(bot_schedule())
+
+    await message.answer("RES 22222222222")
+
+
+
 
 
 
