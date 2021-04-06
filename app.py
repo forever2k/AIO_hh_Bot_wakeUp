@@ -79,7 +79,7 @@ async def res(message: types.Message):
     #     await aioschedule.run_pending()
     #     await asyncio.sleep(1)
 
-    bot_schedule()
+    await bot_schedule()
 
 
 
@@ -194,9 +194,9 @@ async def wake_up():
 
 
 async def bot_schedule():
-    aioschedule.every(2).minutes.do(wake_up)
+    aioschedule.every(60).seconds.do(wake_up)
 
-    while launch:
+    while True:
         await aioschedule.run_pending()
         await asyncio.sleep(1)
 
