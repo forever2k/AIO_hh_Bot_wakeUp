@@ -28,6 +28,9 @@ test_group = -1001153348142
 test = -1001364950026
 
 
+
+
+
 TOKEN = os.getenv('TOKEN')
 PROJECT_NAME = os.getenv('PROJECT_NAME')
 
@@ -81,10 +84,10 @@ async def res22(message: types.Message):
 
     # await bot_schedule()
     # asyncio.run(bot_schedule())
-    a = bot_schedule()
+    bot_schedule()
 
 
-    await message.answer(f"RES {a}")
+    # await message.answer(f"RES {a}")
 
 
 
@@ -192,9 +195,6 @@ def wake_up2():
             except:
                 res += 100
                 # bot.send_message(test, 'Что то не подняли :(')
-
-
-    return res
 
 
 
