@@ -159,7 +159,7 @@ async def wake_up():
 
 def wake_up2():
 
-    bot.send_message(227722043, "Function Wake_up starts")
+    # bot.send_message(227722043, "Function Wake_up starts")
     driver.get(URL)
 
     hh_add = os.environ.get('hh')
