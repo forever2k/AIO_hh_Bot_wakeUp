@@ -85,13 +85,10 @@ async def res22(message: types.Message):
 
     # await bot_schedule()
     # asyncio.run(bot_schedule())
-    bot_schedule()
+    await bot_schedule()
 
 
     # await message.answer(f"RES {a}")
-
-
-
 
 
 
@@ -103,6 +100,12 @@ async def stop_res(message: types.Message):
     launch = False
     await bot.send_message(227722043, "STOP is activated")
 
+
+
+
+async def add_tt():
+
+    await bot.send_message(227722043, "addddd tttttttttttt")
 
 
 async def start_res():
@@ -247,7 +250,7 @@ def wake_up2():
 
 
 
-def bot_schedule():
+async def bot_schedule():
     schedule.every(60).seconds.do(wake_up2)
 
     while launch:
