@@ -81,10 +81,10 @@ async def res22(message: types.Message):
 
     # await bot_schedule()
     # asyncio.run(bot_schedule())
-    bot_schedule()
+    a = bot_schedule()
 
 
-    await message.answer("RES 22222222222")
+    await message.answer(f"RES {a}")
 
 
 
@@ -156,7 +156,7 @@ async def wake_up():
 
 def wake_up2():
 
-    bot.send_message(227722043, "Function Wake_up starts")
+    # bot.send_message(227722043, "Function Wake_up starts")
     driver.get(URL)
 
     hh_add = os.environ.get('hh')
@@ -188,10 +188,10 @@ def wake_up2():
             try:
                 i.click()
                 res += 1
-                bot.send_message(test, 'Подняли! :)')
+                # bot.send_message(test, 'Подняли! :)')
             except:
                 res += 100
-                bot.send_message(test, 'Что то не подняли :(')
+                # bot.send_message(test, 'Что то не подняли :(')
 
 
     return res
