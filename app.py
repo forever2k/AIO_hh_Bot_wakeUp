@@ -81,7 +81,7 @@ async def res22(message: types.Message):
 
     # await bot_schedule()
     # asyncio.run(bot_schedule())
-    b = await bot_schedule()
+    bot_schedule()
 
 
     await message.answer("RES 22222222222")
@@ -154,6 +154,49 @@ async def wake_up():
 
 
 
+def wake_up2():
+
+    bot.send_message(227722043, "Function Wake_up starts")
+    driver.get(URL)
+
+    hh_add = os.environ.get('hh')
+
+    testarray = ast.literal_eval(hh_add)
+
+
+    for cook in testarray:
+        driver.add_cookie(cook)
+
+    time.sleep(2)
+    driver.refresh()
+    time.sleep(1)
+
+    # cookies = pickle.load(open("session", "rb"))
+    # for cookie in cookies:
+    #     driver.add_cookie(cookie)
+    # driver.refresh()
+
+    ob = driver.find_elements_by_class_name("HH-Supernova-NaviLevel2-Link")
+    ob[0].click()
+
+    ob1 = driver.find_elements_by_class_name('bloko-link_dimmed')
+
+    res = 0
+
+    for i in ob1:
+        if i.text == 'Поднять в поиске':
+            try:
+                i.click()
+                res += 1
+                bot.send_message(test, 'Подняли! :)')
+            except:
+                res += 100
+                bot.send_message(test, 'Что то не подняли :(')
+
+
+    return res
+
+
 
 # async def scheduler():
 #     try:
@@ -204,7 +247,7 @@ async def wake_up():
 
 
 def bot_schedule():
-    schedule.every(60).seconds.do(wake_up)
+    schedule.every(60).seconds.do(wake_up2)
 
     while launch:
         schedule.run_pending()
