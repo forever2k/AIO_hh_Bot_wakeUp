@@ -56,7 +56,7 @@ async def main_start(message: types.Message):
 async def res(message: types.Message):
     await message.answer("RES AIO_Bot starts to work")
 
-    await start_res()
+    # await start_res()
     await wake_up()
 
 
@@ -128,6 +128,7 @@ async def wake_up():
     for i in ob1:
         await bot.send_message(227722043, "iii")
         if i.text == 'Поднять в поиске':
+            await bot.send_message(227722043, "IF IF")
             try:
                 i.click()
                 await bot.send_message(test, 'Cool! Raised successfully')
@@ -135,6 +136,8 @@ async def wake_up():
                 await bot.send_message(test, "Ups, couldn't raise :(")
 
     await bot.send_message(227722043, "here 33333333")
+
+    return True
 
 
 # async def scheduler():
