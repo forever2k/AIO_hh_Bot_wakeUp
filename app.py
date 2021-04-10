@@ -143,7 +143,8 @@ async def bot_schedule():
 async def on_startup(dp):
     logging.warning('Starting connection')
     await bot.set_webhook(WEBHOOK_URL)
-    await bot_schedule()
+    asyncio.create_task(bot_schedule())
+
 
 
 async def on_shutdown(dp):
