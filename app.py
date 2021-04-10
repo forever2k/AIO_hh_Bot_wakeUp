@@ -126,16 +126,16 @@ async def wake_up():
     await bot.send_message(227722043, len(ob1))
 
     for i in ob1:
-        await bot.send_message(227722043, "iii")
+        # await bot.send_message(227722043, "iii")
         if i.text == 'Поднять в поиске':
-            await bot.send_message(227722043, "IF IF")
+            # await bot.send_message(227722043, "IF IF")
             try:
                 i.click()
-                await bot.send_message(test, 'Cool! Raised successfully')
+                await bot.send_message(227722043, 'Cool! Raised successfully')
             except:
-                await bot.send_message(test, "Ups, couldn't raise :(")
+                await bot.send_message(227722043, "Ups, couldn't raise :(")
 
-    await bot.send_message(227722043, "here 33333333")
+    await bot.send_message(227722043, "finish")
 
     return True
 
