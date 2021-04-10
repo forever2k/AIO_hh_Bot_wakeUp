@@ -64,7 +64,7 @@ async def res(message: types.Message):
 @dp.message_handler(commands=['res2'])
 async def res2(message: types.Message):
     await message.answer("RES 2")
-    # await start_res()
+    await start_res()
     await bot_schedule()
 
 
@@ -82,7 +82,6 @@ async def start_res():
 
     global launch
     launch = True
-
     await bot.send_message(me, "launch is True")
 
 
@@ -95,7 +94,6 @@ async def wake_up():
     hh_cookies = os.environ.get('hh')
 
     testarray = ast.literal_eval(hh_cookies)
-
 
     for cook in testarray:
         driver.add_cookie(cook)
@@ -125,36 +123,19 @@ async def wake_up():
     return True
 
 
-# async def scheduler():
-#     try:
-#         aioschedule.every(2).minutes.do(wake_up)
-#         while launch:
-#             await aioschedule.run_pending()
-#             await asyncio.sleep(1)
-#     except Exception as e:
-#         await bot.send_message(test, e)
-
-
-# async def scheduler():
-#     aioschedule.every(4).minutes.do(wake_up)
-#     loop = asyncio.get_event_loop()
-#     while True:
-#         loop.run_until_complete(aioschedule.run_pending())
-#         await asyncio.sleep(1)
-
-
 
 # loop = asyncio.new_event_loop()
 # asyncio.set_event_loop(loop)
-#
-
 
 
 async def bot_schedule():
-    aioschedule.every(60).seconds.do(wake_up)
-    while launch:
-        await aioschedule.run_pending()
-        await asyncio.sleep(1)
+    try:
+        aioschedule.every(3).minutes.do(wake_up)
+        while launch:
+            await aioschedule.run_pending()
+            await asyncio.sleep(1)
+    except Exception as e:
+        await bot.send_message(me, e)
 
 
 
