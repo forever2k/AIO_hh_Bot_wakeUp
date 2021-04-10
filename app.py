@@ -26,7 +26,7 @@ launch = True
 
 test_group = -1001153348142
 test = -1001364950026
-
+me = os.getenv('me')
 
 
 
@@ -62,7 +62,7 @@ async def res(message: types.Message):
 
 
 @dp.message_handler(commands=['res2'])
-async def res22(message: types.Message):
+async def res2(message: types.Message):
     await message.answer("RES 2")
     # await start_res()
     await bot_schedule()
@@ -74,14 +74,8 @@ async def stop_res(message: types.Message):
 
     global launch
     launch = False
-    await bot.send_message(227722043, "STOP is activated")
+    await bot.send_message(me, "STOP is activated")
 
-
-
-
-async def add_tt():
-
-    await bot.send_message(227722043, "addddd tttttttttttt")
 
 
 async def start_res():
@@ -89,13 +83,13 @@ async def start_res():
     global launch
     launch = True
 
-    await bot.send_message(227722043, "launch is True")
+    await bot.send_message(me, "launch is True")
 
 
 
 async def wake_up():
 
-    await bot.send_message(227722043, "Function Wake_up starts")
+    await bot.send_message(me, "Function Wake_up starts")
     driver.get(URL)
 
     hh_cookies = os.environ.get('hh')
@@ -115,27 +109,18 @@ async def wake_up():
     #     driver.add_cookie(cookie)
     # driver.refresh()
 
-    await bot.send_message(227722043, "here")
-
     ob = driver.find_elements_by_class_name("HH-Supernova-NaviLevel2-Link")
     ob[0].click()
 
     ob1 = driver.find_elements_by_class_name('bloko-link_dimmed')
 
-    await bot.send_message(227722043, "here 2222222222")
-    await bot.send_message(227722043, len(ob1))
-
     for i in ob1:
-        # await bot.send_message(227722043, "iii")
         if i.text == 'Поднять в поиске':
-            # await bot.send_message(227722043, "IF IF")
             try:
                 i.click()
-                await bot.send_message(227722043, 'Cool! Raised successfully')
+                await bot.send_message(me, 'Cool! Raised successfully')
             except:
-                await bot.send_message(227722043, "Ups, couldn't raise :(")
-
-    await bot.send_message(227722043, "finish")
+                await bot.send_message(me, "Ups, couldn't raise :(")
 
     return True
 
