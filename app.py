@@ -55,15 +55,12 @@ async def main_start(message: types.Message):
 @dp.message_handler(commands=['res'])
 async def res(message: types.Message):
     await message.answer("RES AIO_Bot starts to work")
-
-    # await start_res()
     await wake_up()
-
 
 
 @dp.message_handler(commands=['res2'])
 async def res2(message: types.Message):
-    await message.answer("RES 2")
+    await message.answer("RES2 AIO_Bot starts to work")
     await start_res()
     asyncio.create_task(bot_schedule())
 
@@ -88,7 +85,7 @@ async def start_res():
 
 async def wake_up():
 
-    await bot.send_message(me, "Function Wake_up starts")
+    await bot.send_message(test_group, "Function Wake_up starts")
     driver.get(URL)
 
     hh_cookies = os.environ.get('hh')
@@ -98,9 +95,9 @@ async def wake_up():
     for cook in testarray:
         driver.add_cookie(cook)
 
-    await asyncio.sleep(2)
-    driver.refresh()
-    await asyncio.sleep(1)
+    # await asyncio.sleep(1)
+    # driver.refresh()
+    # await asyncio.sleep(1)
 
     # cookies = pickle.load(open("session", "rb"))
     # for cookie in cookies:
@@ -116,9 +113,9 @@ async def wake_up():
         if i.text == 'Поднять в поиске':
             try:
                 i.click()
-                await bot.send_message(me, 'Cool! Raised successfully')
+                await bot.send_message(test_group, 'Cool! Raised successfully')
             except:
-                await bot.send_message(me, "Ups, couldn't raise :(")
+                await bot.send_message(test_group, "Ups, couldn't raise :(")
 
     return True
 
@@ -130,7 +127,7 @@ async def wake_up():
 
 async def bot_schedule():
     try:
-        aioschedule.every(60).seconds.do(wake_up)
+        aioschedule.every(60).minutes.do(wake_up)
         while launch:
             await aioschedule.run_pending()
             await asyncio.sleep(1)
