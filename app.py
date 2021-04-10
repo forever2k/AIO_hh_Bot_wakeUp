@@ -130,7 +130,7 @@ async def wake_up():
 
 async def bot_schedule():
     try:
-        aioschedule.every(3).minutes.do(wake_up)
+        aioschedule.every(60).seconds.do(wake_up)
         while launch:
             await aioschedule.run_pending()
             await asyncio.sleep(1)
