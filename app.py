@@ -55,7 +55,6 @@ async def main_start(message: types.Message):
 @dp.message_handler(commands=['res'])
 async def res(message: types.Message):
     await message.answer("RES AIO_Bot starts to work")
-    # await bot.send_message(227722043, "Function Wake_up starts")
 
     await start_res()
     await wake_up()
@@ -67,10 +66,6 @@ async def res22(message: types.Message):
     await message.answer("RES 2")
     # await start_res()
     await bot_schedule()
-
-
-    # await message.answer(f"RES {a}")
-
 
 
 
@@ -105,9 +100,9 @@ async def wake_up():
 
     await bot.send_message(227722043, URL)
 
-    hh_add = os.environ.get('hh')
+    hh_cookies = os.environ.get('hh')
 
-    testarray = ast.literal_eval(hh_add)
+    testarray = ast.literal_eval(hh_cookies)
 
 
     for cook in testarray:
@@ -129,15 +124,17 @@ async def wake_up():
 
     ob1 = driver.find_elements_by_class_name('bloko-link_dimmed')
 
+    await bot.send_message(227722043, "here 2222222222")
+
     for i in ob1:
         if i.text == 'Поднять в поиске':
             try:
                 i.click()
-                await bot.send_message(test, 'Подняли! :)')
+                await bot.send_message(test, 'Cool! Raised successfully')
             except:
-                await bot.send_message(test, 'Что то не подняли :(')
+                await bot.send_message(test, "Ups, couldn't raise :(")
 
-
+    await bot.send_message(227722043, "here 33333333")
 
 
 # async def scheduler():
