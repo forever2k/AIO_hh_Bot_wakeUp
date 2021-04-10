@@ -65,7 +65,7 @@ async def res(message: types.Message):
 async def res2(message: types.Message):
     await message.answer("RES 2")
     await start_res()
-    # await bot_schedule()
+    asyncio.create_task(bot_schedule())
 
 
 
@@ -143,7 +143,7 @@ async def bot_schedule():
 async def on_startup(dp):
     logging.warning('Starting connection')
     await bot.set_webhook(WEBHOOK_URL)
-    asyncio.create_task(bot_schedule())
+    # asyncio.create_task(bot_schedule())
 
 
 
