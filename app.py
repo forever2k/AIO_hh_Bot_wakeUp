@@ -98,8 +98,6 @@ async def wake_up():
     await bot.send_message(227722043, "Function Wake_up starts")
     driver.get(URL)
 
-    await bot.send_message(227722043, URL)
-
     hh_cookies = os.environ.get('hh')
 
     testarray = ast.literal_eval(hh_cookies)
@@ -125,8 +123,10 @@ async def wake_up():
     ob1 = driver.find_elements_by_class_name('bloko-link_dimmed')
 
     await bot.send_message(227722043, "here 2222222222")
+    await bot.send_message(227722043, len(ob1))
 
     for i in ob1:
+        await bot.send_message(227722043, "iii")
         if i.text == 'Поднять в поиске':
             try:
                 i.click()
@@ -159,29 +159,6 @@ async def wake_up():
 # loop = asyncio.new_event_loop()
 # asyncio.set_event_loop(loop)
 #
-#
-# async def scheduler():
-#     aioschedule.every(2).minutes.do(wake_up)
-#
-#     while launch:
-#         await aioschedule.run_pending()
-#         await asyncio.sleep(2)
-
-# async def do_schedule():
-#     schedule.every(2).minutes.do(wake_up)
-#
-#     while launch:
-#         schedule.run_pending()
-#         time.sleep(1)
-
-
-# async def bot_schedule():
-#     schedule.every(2).minutes.do(wake_up)
-#
-#     while launch:
-#         schedule.run_pending()
-#         time.sleep(1)
-
 
 
 
@@ -197,14 +174,6 @@ async def bot_schedule():
 async def on_startup(dp):
     logging.warning('Starting connection')
     await bot.set_webhook(WEBHOOK_URL)
-
-    # dp.loop.create_task(scheduler())
-    # asyncio.create_task(scheduler())
-
-    # aioschedule.every(2).minutes.do(wake_up)
-    # while launch:
-    #     await aioschedule.run_pending()
-    #     await asyncio.sleep(1)
 
 
 async def on_shutdown(dp):
