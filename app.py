@@ -103,6 +103,8 @@ async def wake_up():
     await bot.send_message(227722043, "Function Wake_up starts")
     driver.get(URL)
 
+    await bot.send_message(227722043, URL)
+
     hh_add = os.environ.get('hh')
 
     testarray = ast.literal_eval(hh_add)
@@ -119,6 +121,8 @@ async def wake_up():
     # for cookie in cookies:
     #     driver.add_cookie(cookie)
     # driver.refresh()
+
+    await bot.send_message(227722043, "here")
 
     ob = driver.find_elements_by_class_name("HH-Supernova-NaviLevel2-Link")
     ob[0].click()
