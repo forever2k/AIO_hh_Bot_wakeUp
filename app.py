@@ -41,7 +41,7 @@ WEBAPP_HOST = '0.0.0.0'
 WEBAPP_PORT = os.environ.get('PORT')
 
 
-logging.basicConfig(level=logging.DEBUG)
+log = logging.basicConfig(level=logging.DEBUG)
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot)
@@ -50,6 +50,7 @@ dp = Dispatcher(bot)
 @dp.message_handler(commands=['start'])
 async def main_start(message: types.Message):
     await message.answer("Bot AIO_hh_wakeUp works")
+    await message.answer(log)
 
 
 @dp.message_handler(commands=['res'])
