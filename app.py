@@ -104,10 +104,14 @@ async def wake_up():
     #     driver.add_cookie(cookie)
     # driver.refresh()
 
+    await bot.send_message(test_group, 'before search')
+
     ob = driver.find_elements_by_class_name("HH-Supernova-NaviLevel2-Link")
     ob[0].click()
 
     ob1 = driver.find_elements_by_class_name('bloko-link_dimmed')
+
+    await bot.send_message(test_group, 'after search')
 
     for i in ob1:
         if i.text == 'Поднять в поиске':
@@ -127,7 +131,8 @@ async def wake_up():
 
 async def bot_schedule():
     try:
-        aioschedule.every(60).minutes.do(wake_up)
+        # aioschedule.every(60).minutes.do(wake_up)
+        aioschedule.every(60).seconds.do(wake_up)
         while launch:
             await aioschedule.run_pending()
             await asyncio.sleep(1)
