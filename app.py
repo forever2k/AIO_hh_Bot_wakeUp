@@ -111,7 +111,7 @@ async def wake_up():
 
     ob1 = driver.find_elements_by_class_name('bloko-link_dimmed')
 
-    await bot.send_message(test_group, 'after search')
+    await bot.send_message(test_group, f'length of ob1 = {len(ob1)}')
 
     for i in ob1:
         if i.text == 'Поднять в поиске':
@@ -120,6 +120,8 @@ async def wake_up():
                 await bot.send_message(test_group, 'Cool! Raised successfully')
             except:
                 await bot.send_message(test_group, "Ups, couldn't raise :(")
+
+    await bot.send_message(test_group, 'after search')
 
     return True
 
