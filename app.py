@@ -107,6 +107,10 @@ async def wake_up():
     await bot.send_message(test_group, 'before search')
 
     ob = driver.find_elements_by_class_name("HH-Supernova-NaviLevel2-Link")
+
+    
+    await bot.send_message(test_group, f'length of ob = {len[ob]}')
+    
     ob[0].click()
 
     ob1 = driver.find_elements_by_class_name('bloko-link_dimmed')
