@@ -111,6 +111,10 @@ async def wake_up():
 
     await bot.send_message(test_group, f'length of ob = {len(ob)}')
 
+    if len(ob) == 0:
+
+        return True
+
     ob[0].click()
 
     ob1 = driver.find_elements_by_class_name('bloko-link_dimmed')
@@ -137,8 +141,8 @@ async def wake_up():
 
 async def bot_schedule():
     try:
-        # aioschedule.every(60).minutes.do(wake_up)
-        aioschedule.every(80).seconds.do(wake_up)
+        aioschedule.every(60).minutes.do(wake_up)
+        # aioschedule.every(80).seconds.do(wake_up)
         while launch:
             await aioschedule.run_pending()
             await asyncio.sleep(1)
