@@ -117,36 +117,42 @@ async def wake_up():
 
         await bot.send_message(test_group, 'before search')
 
-        ob = driver.find_elements_by_class_name("HH-Supernova-NaviLevel2-Link")
+        try:
+            ob = driver.find_elements_by_class_name("HH-Supernova-NaviLevel2-Link")
+            await bot.send_message(test_group, f'length of ob = {len(ob)}')
+        except:
+            await bot.send_message(test_group, "Ups, couldn't find ob")
 
-        await bot.send_message(test_group, f'length of ob = {len(ob)}')
+        # await bot.send_message(test_group, f'length of ob = {len(ob)}')
 
-        if len(ob) == 0:
+        try:
+            ob[0].click()
+        except:
+            await bot.send_message(test_group, "Ups, couldn't: ob[0].click()")
 
-            return True
+        try:
+            ob1 = driver.find_elements_by_class_name('bloko-link_dimmed')
+            await bot.send_message(test_group, f'length of ob1 = {len(ob1)}')
+        except:
+            await bot.send_message(test_group, "Ups, couldn't find ob1")
 
-        ob[0].click()
+        # await bot.send_message(test_group, f'length of ob1 = {len(ob1)}')
 
-        ob1 = driver.find_elements_by_class_name('bloko-link_dimmed')
-
-        await bot.send_message(test_group, f'length of ob1 = {len(ob1)}')
-
-        for i in ob1:
-            if i.text == 'Поднять в поиске':
-                try:
-                    i.click()
-                    await bot.send_message(test_group, 'Cool! Raised successfully')
-                except:
-                    await bot.send_message(test_group, "Ups, couldn't raise :(")
-            else:
-                pass
+        if len(ob1) > 0:
+            for i in ob1:
+                if i.text == 'Поднять в поиске':
+                    try:
+                        i.click()
+                        await bot.send_message(test_group, 'Cool! Raised successfully')
+                    except:
+                        await bot.send_message(test_group, "Ups, couldn't raise :(")
+                else:
+                    pass
 
         await bot.send_message(test_group, 'after search')
-        return True
 
     except Exception as e:
         await bot.send_message(test_group, e)
-        return True
 
 
 
