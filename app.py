@@ -86,52 +86,70 @@ async def start_res():
 
 async def wake_up():
 
-    await bot.send_message(test_group, "Function Wake_up starts")
-    driver.get(URL)
+    try:
+        await bot.send_message(test_group, "Function Wake_up starts")
 
-    hh_cookies = os.environ.get('hh')
+        try:
+            driver.get(URL)
+        except:
+            await bot.send_message(test_group, "Couldn't get URL")
 
-    testarray = ast.literal_eval(hh_cookies)
+        try:
+            hh_cookies = os.environ.get('hh')
+        except:
+            await bot.send_message(test_group, "Couldn't get hh_cookies")
 
-    for cook in testarray:
-        driver.add_cookie(cook)
+        try:
+            testarray = ast.literal_eval(hh_cookies)
 
-    # await asyncio.sleep(1)
-    # driver.refresh()
-    # await asyncio.sleep(1)
+            for cook in testarray:
+                driver.add_cookie(cook)
+        except:
+            await bot.send_message(test_group, "Couldn't do: driver.add_cookie(cook)")
 
-    # cookies = pickle.load(open("session", "rb"))
-    # for cookie in cookies:
-    #     driver.add_cookie(cookie)
-    # driver.refresh()
+        await asyncio.sleep(1)
+        driver.refresh()
+        await asyncio.sleep(1)
 
-    await bot.send_message(test_group, 'before search')
+        # cookies = pickle.load(open("session", "rb"))
+        # for cookie in cookies:
+        #     driver.add_cookie(cookie)
+        # driver.refresh()
 
-    ob = driver.find_elements_by_class_name("HH-Supernova-NaviLevel2-Link")
+        await bot.send_message(test_group, 'before search')
 
-    await bot.send_message(test_group, f'length of ob = {len(ob)}')
+        ob = driver.find_elements_by_class_name("HH-Supernova-NaviLevel2-Link")
 
-    if len(ob) == 0:
+        await bot.send_message(test_group, f'length of ob = {len(ob)}')
 
+        if len(ob) == 0:
+
+            return True
+
+        ob[0].click()
+
+        ob1 = driver.find_elements_by_class_name('bloko-link_dimmed')
+
+        await bot.send_message(test_group, f'length of ob1 = {len(ob1)}')
+
+        for i in ob1:
+            if i.text == 'Поднять в поиске':
+                try:
+                    i.click()
+                    await bot.send_message(test_group, 'Cool! Raised successfully')
+                except:
+                    await bot.send_message(test_group, "Ups, couldn't raise :(")
+            else:
+                pass
+
+        await bot.send_message(test_group, 'after search')
         return True
 
-    ob[0].click()
+    except Exception as e:
+        await bot.send_message(test_group, e)
+        return True
 
-    ob1 = driver.find_elements_by_class_name('bloko-link_dimmed')
 
-    await bot.send_message(test_group, f'length of ob1 = {len(ob1)}')
-
-    for i in ob1:
-        if i.text == 'Поднять в поиске':
-            try:
-                i.click()
-                await bot.send_message(test_group, 'Cool! Raised successfully')
-            except:
-                await bot.send_message(test_group, "Ups, couldn't raise :(")
-
-    await bot.send_message(test_group, 'after search')
-
-    return True
 
 
 
