@@ -52,182 +52,181 @@ dp = Dispatcher(bot)
 async def main_start(message: types.Message):
     await message.answer("Bot AIO_hh_wakeUp works")
 
+
+@dp.message_handler(commands=['res'])
+async def res(message: types.Message):
+    await message.answer("RES AIO_Bot starts to work")
+    await wake_up()
+
+
+@dp.message_handler(commands=['res2'])
+async def res2(message: types.Message):
+    await message.answer("RES2 AIO_Bot starts to work")
+    await start_res()
+    asyncio.create_task(bot_schedule())
+
+
+
+@dp.message_handler(commands=['stop'])
+async def stop_res(message: types.Message):
+
+    global launch
+    launch = False
+    await bot.send_message(me, "STOP is activated")
+
+
+
+async def start_res():
+
+    global launch
+    launch = True
+    await bot.send_message(me, "launch is True")
+
+
+async def wake_up():
+
+    try:
+        await bot.send_message(test_group, "Function Wake_up starts")
+
+        driver.get(URL)
+
+        hh_cookies = os.environ.get('hh')
+
+        testarray = ast.literal_eval(hh_cookies)
+
+        for cook in testarray:
+            driver.add_cookie(cook)
+
+        await asyncio.sleep(1)
+        driver.refresh()
+        await asyncio.sleep(1)
+
+        # cookies = pickle.load(open("session", "rb"))
+        # for cookie in cookies:
+        #     driver.add_cookie(cookie)
+        # driver.refresh()
+
+        await bot.send_message(test_group, 'before search')
+
+        ob = driver.find_elements_by_class_name("HH-Supernova-NaviLevel2-Link")
+
+        await bot.send_message(test_group, f'length of ob = {len(ob)}')
+
+        ob[0].click()
+
+        ob1 = driver.find_elements_by_class_name('bloko-link_dimmed')
+
+        await bot.send_message(test_group, f'length of ob1 = {len(ob1)}')
+
+
+        if len(ob1) > 0:
+            for i in ob1:
+                if i.text == 'Поднять в поиске':
+                    try:
+                        i.click()
+                        await bot.send_message(test_group, 'Cool! Raised successfully')
+                    except:
+                        await bot.send_message(test_group, "Ups, couldn't raise :(")
+                else:
+                    pass
+
+        await bot.send_message(test_group, 'after search')
+        return True
+
+    except Exception as e:
+        await bot.send_message(test_group, e)
+        return True
+
+
+
+
+# async def wake_up():
 #
-# @dp.message_handler(commands=['res'])
-# async def res(message: types.Message):
-#     await message.answer("RES AIO_Bot starts to work")
-#     # await wake_up()
+#     try:
+#         await bot.send_message(test_group, "Function Wake_up starts")
 #
+#         try:
+#             driver.get(URL)
+#         except:
+#             await bot.send_message(test_group, "Couldn't get URL")
 #
-# @dp.message_handler(commands=['res2'])
-# async def res2(message: types.Message):
-#     await message.answer("RES2 AIO_Bot starts to work")
-#     await start_res()
-#     # asyncio.create_task(bot_schedule())
+#         try:
+#             hh_cookies = os.environ.get('hh')
+#         except:
+#             await bot.send_message(test_group, "Couldn't get hh_cookies")
 #
+#         try:
+#             testarray = ast.literal_eval(hh_cookies)
 #
+#             for cook in testarray:
+#                 driver.add_cookie(cook)
+#         except:
+#             await bot.send_message(test_group, "Couldn't do: driver.add_cookie(cook)")
 #
-# @dp.message_handler(commands=['stop'])
-# async def stop_res(message: types.Message):
+#         await asyncio.sleep(1)
+#         driver.refresh()
+#         await asyncio.sleep(1)
 #
-#     global launch
-#     launch = False
-#     await bot.send_message(me, "STOP is activated")
+#         # cookies = pickle.load(open("session", "rb"))
+#         # for cookie in cookies:
+#         #     driver.add_cookie(cookie)
+#         # driver.refresh()
 #
+#         await bot.send_message(test_group, 'before search')
 #
+#         try:
+#             ob = driver.find_elements_by_class_name("HH-Supernova-NaviLevel2-Link")
+#             await bot.send_message(test_group, f'length of ob = {len(ob)}')
+#         except:
+#             await bot.send_message(test_group, "Ups, couldn't find ob")
 #
-# async def start_res():
+#         # await bot.send_message(test_group, f'length of ob = {len(ob)}')
 #
-#     global launch
-#     launch = True
-#     await bot.send_message(me, "launch is True")
+#         try:
+#             ob[0].click()
+#         except:
+#             await bot.send_message(test_group, "Ups, couldn't: ob[0].click()")
 #
-# #
-# # async def wake_up():
-# #
-# #     try:
-# #         await bot.send_message(test_group, "Function Wake_up starts")
-# #
-# #         driver.get(URL)
-# #
-# #         hh_cookies = os.environ.get('hh')
-# #
-# #         testarray = ast.literal_eval(hh_cookies)
-# #
-# #         for cook in testarray:
-# #             driver.add_cookie(cook)
-# #
-# #         await asyncio.sleep(1)
-# #         driver.refresh()
-# #         await asyncio.sleep(1)
-# #
-# #         # cookies = pickle.load(open("session", "rb"))
-# #         # for cookie in cookies:
-# #         #     driver.add_cookie(cookie)
-# #         # driver.refresh()
-# #
-# #         await bot.send_message(test_group, 'before search')
-# #
-# #         ob = driver.find_elements_by_class_name("HH-Supernova-NaviLevel2-Link")
-# #
-# #         await bot.send_message(test_group, f'length of ob = {len(ob)}')
-# #
-# #         ob[0].click()
-# #
-# #         ob1 = driver.find_elements_by_class_name('bloko-link_dimmed')
-# #
-# #         await bot.send_message(test_group, f'length of ob1 = {len(ob1)}')
-# #
-# #
-# #         if len(ob1) > 0:
-# #             for i in ob1:
-# #                 if i.text == 'Поднять в поиске':
-# #                     try:
-# #                         i.click()
-# #                         await bot.send_message(test_group, 'Cool! Raised successfully')
-# #                     except:
-# #                         await bot.send_message(test_group, "Ups, couldn't raise :(")
-# #                 else:
-# #                     pass
-# #
-# #         await bot.send_message(test_group, 'after search')
-# #         return True
-# #
-# #     except Exception as e:
-# #         await bot.send_message(test_group, e)
-# #         return True
+#         try:
+#             ob1 = driver.find_elements_by_class_name('bloko-link_dimmed')
+#             await bot.send_message(test_group, f'length of ob1 = {len(ob1)}')
+#         except:
+#             await bot.send_message(test_group, "Ups, couldn't find ob1")
 #
+#         # await bot.send_message(test_group, f'length of ob1 = {len(ob1)}')
 #
+#         if len(ob1) > 0:
+#             for i in ob1:
+#                 if i.text == 'Поднять в поиске':
+#                     try:
+#                         i.click()
+#                         await bot.send_message(test_group, 'Cool! Raised successfully')
+#                     except:
+#                         await bot.send_message(test_group, "Ups, couldn't raise :(")
+#                 else:
+#                     pass
 #
+#         await bot.send_message(test_group, 'after search')
 #
-#
-# # async def wake_up():
-# #
-# #     try:
-# #         await bot.send_message(test_group, "Function Wake_up starts")
-# #
-# #         try:
-# #             driver.get(URL)
-# #         except:
-# #             await bot.send_message(test_group, "Couldn't get URL")
-# #
-# #         try:
-# #             hh_cookies = os.environ.get('hh')
-# #         except:
-# #             await bot.send_message(test_group, "Couldn't get hh_cookies")
-# #
-# #         try:
-# #             testarray = ast.literal_eval(hh_cookies)
-# #
-# #             for cook in testarray:
-# #                 driver.add_cookie(cook)
-# #         except:
-# #             await bot.send_message(test_group, "Couldn't do: driver.add_cookie(cook)")
-# #
-# #         await asyncio.sleep(1)
-# #         driver.refresh()
-# #         await asyncio.sleep(1)
-# #
-# #         # cookies = pickle.load(open("session", "rb"))
-# #         # for cookie in cookies:
-# #         #     driver.add_cookie(cookie)
-# #         # driver.refresh()
-# #
-# #         await bot.send_message(test_group, 'before search')
-# #
-# #         try:
-# #             ob = driver.find_elements_by_class_name("HH-Supernova-NaviLevel2-Link")
-# #             await bot.send_message(test_group, f'length of ob = {len(ob)}')
-# #         except:
-# #             await bot.send_message(test_group, "Ups, couldn't find ob")
-# #
-# #         # await bot.send_message(test_group, f'length of ob = {len(ob)}')
-# #
-# #         try:
-# #             ob[0].click()
-# #         except:
-# #             await bot.send_message(test_group, "Ups, couldn't: ob[0].click()")
-# #
-# #         try:
-# #             ob1 = driver.find_elements_by_class_name('bloko-link_dimmed')
-# #             await bot.send_message(test_group, f'length of ob1 = {len(ob1)}')
-# #         except:
-# #             await bot.send_message(test_group, "Ups, couldn't find ob1")
-# #
-# #         # await bot.send_message(test_group, f'length of ob1 = {len(ob1)}')
-# #
-# #         if len(ob1) > 0:
-# #             for i in ob1:
-# #                 if i.text == 'Поднять в поиске':
-# #                     try:
-# #                         i.click()
-# #                         await bot.send_message(test_group, 'Cool! Raised successfully')
-# #                     except:
-# #                         await bot.send_message(test_group, "Ups, couldn't raise :(")
-# #                 else:
-# #                     pass
-# #
-# #         await bot.send_message(test_group, 'after search')
-# #
-# #     except Exception as e:
-# #         await bot.send_message(test_group, e)
-#
-#
-# # loop = asyncio.new_event_loop()
-# # asyncio.set_event_loop(loop)
-#
-# #
-# # async def bot_schedule():
-# #     try:
-# #         aioschedule.every(60).minutes.do(wake_up)
-# #         # aioschedule.every(80).seconds.do(wake_up)
-# #         while launch:
-# #             await aioschedule.run_pending()
-# #             await asyncio.sleep(1)
-# #     except Exception as e:
-# #         await bot.send_message(me, e)
-#
-#
+#     except Exception as e:
+#         await bot.send_message(test_group, e)
+
+
+# loop = asyncio.new_event_loop()
+# asyncio.set_event_loop(loop)
+
+
+async def bot_schedule():
+    try:
+        aioschedule.every(60).minutes.do(wake_up)
+        # aioschedule.every(80).seconds.do(wake_up)
+        while launch:
+            await aioschedule.run_pending()
+            await asyncio.sleep(1)
+    except Exception as e:
+        await bot.send_message(me, e)
+
+
 
 
 async def on_startup(dp):
