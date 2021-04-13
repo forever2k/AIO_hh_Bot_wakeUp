@@ -48,7 +48,6 @@ bot = Bot(token=TOKEN)
 dp = Dispatcher(bot)
 
 
-
 @dp.message_handler(commands=['start'])
 async def main_start(message: types.Message):
     await message.answer("Bot AIO_hh_wakeUp works")
