@@ -131,9 +131,11 @@ async def wake_up():
                     pass
 
         await bot.send_message(test_group, 'after search')
+        return True
 
     except Exception as e:
         await bot.send_message(test_group, e)
+        return True
 
 
 
