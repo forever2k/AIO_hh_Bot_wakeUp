@@ -20,14 +20,14 @@ from aiogram.utils.exceptions import BotBlocked
 #
 # driver = webdriver.Chrome(executable_path=os.environ.get('CHROMEDRIVER_PATH'), chrome_options=chrome_options)
 # driver.implicitly_wait(4)
-#
-# URL = os.getenv('URL')
-#
-# launch = True
-#
-# test_group = -1001153348142
-# test = -1001364950026
-# me = os.getenv('me')
+
+URL = os.getenv('URL')
+
+launch = True
+
+test_group = -1001153348142
+test = -1001364950026
+me = os.getenv('me')
 
 
 
