@@ -118,23 +118,23 @@ async def wake_up():
         await bot.send_message(test_group, f'length of ob1 = {len(ob1)}')
 
 
-        if len(ob1) > 0:
-            for i in ob1:
-                if i.text == 'Поднять в поиске':
-                    try:
-                        i.click()
-                        await bot.send_message(test_group, 'Cool! Raised successfully')
-                    except:
-                        await bot.send_message(test_group, "Ups, couldn't raise :(")
-                else:
-                    pass
+        # if len(ob1) > 0:
+        for i in ob1:
+            if i.text == 'Поднять в поиске':
+                try:
+                    i.click()
+                    await bot.send_message(test_group, 'Cool! Raised successfully')
+                except:
+                    await bot.send_message(test_group, "Ups, couldn't raise :(")
+                # else:
+                #     pass
 
         await bot.send_message(test_group, 'after search')
-        return True
+
 
     except Exception as e:
+
         await bot.send_message(test_group, e)
-        return True
 
 
 
