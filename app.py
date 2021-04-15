@@ -22,6 +22,7 @@ driver = webdriver.Chrome(executable_path=os.environ.get('CHROMEDRIVER_PATH'), c
 driver.implicitly_wait(4)
 
 URL = os.getenv('URL')
+URL2 = os.getenv('URL2')
 
 launch = True
 
@@ -110,8 +111,11 @@ async def wake_up():
         ob = driver.find_elements_by_class_name("HH-Supernova-NaviLevel2-Link")
 
         await bot.send_message(test_group, f'length of ob = {len(ob)}')
-
-        ob[0].click()
+        
+        try:
+            ob[0].click()
+        except:
+            driver.get(URL2)
 
         ob1 = driver.find_elements_by_class_name('bloko-link_dimmed')
 
@@ -136,80 +140,7 @@ async def wake_up():
 
         await bot.send_message(test_group, e)
 
-
-
-
-# async def wake_up():
-#
-#     try:
-#         await bot.send_message(test_group, "Function Wake_up starts")
-#
-#         try:
-#             driver.get(URL)
-#         except:
-#             await bot.send_message(test_group, "Couldn't get URL")
-#
-#         try:
-#             hh_cookies = os.environ.get('hh')
-#         except:
-#             await bot.send_message(test_group, "Couldn't get hh_cookies")
-#
-#         try:
-#             testarray = ast.literal_eval(hh_cookies)
-#
-#             for cook in testarray:
-#                 driver.add_cookie(cook)
-#         except:
-#             await bot.send_message(test_group, "Couldn't do: driver.add_cookie(cook)")
-#
-#         await asyncio.sleep(1)
-#         driver.refresh()
-#         await asyncio.sleep(1)
-#
-#         # cookies = pickle.load(open("session", "rb"))
-#         # for cookie in cookies:
-#         #     driver.add_cookie(cookie)
-#         # driver.refresh()
-#
-#         await bot.send_message(test_group, 'before search')
-#
-#         try:
-#             ob = driver.find_elements_by_class_name("HH-Supernova-NaviLevel2-Link")
-#             await bot.send_message(test_group, f'length of ob = {len(ob)}')
-#         except:
-#             await bot.send_message(test_group, "Ups, couldn't find ob")
-#
-#         # await bot.send_message(test_group, f'length of ob = {len(ob)}')
-#
-#         try:
-#             ob[0].click()
-#         except:
-#             await bot.send_message(test_group, "Ups, couldn't: ob[0].click()")
-#
-#         try:
-#             ob1 = driver.find_elements_by_class_name('bloko-link_dimmed')
-#             await bot.send_message(test_group, f'length of ob1 = {len(ob1)}')
-#         except:
-#             await bot.send_message(test_group, "Ups, couldn't find ob1")
-#
-#         # await bot.send_message(test_group, f'length of ob1 = {len(ob1)}')
-#
-#         if len(ob1) > 0:
-#             for i in ob1:
-#                 if i.text == 'Поднять в поиске':
-#                     try:
-#                         i.click()
-#                         await bot.send_message(test_group, 'Cool! Raised successfully')
-#                     except:
-#                         await bot.send_message(test_group, "Ups, couldn't raise :(")
-#                 else:
-#                     pass
-#
-#         await bot.send_message(test_group, 'after search')
-#
-#     except Exception as e:
-#         await bot.send_message(test_group, e)
-
+        
 
 # loop = asyncio.new_event_loop()
 # asyncio.set_event_loop(loop)
