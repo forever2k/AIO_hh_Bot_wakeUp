@@ -88,9 +88,7 @@ async def start_res():
 async def wake_up():
 
     try:
-
         await bot.send_message(test_group, "Function Wake_up starts")
-
 
         driver.get(URL)
 
@@ -138,10 +136,12 @@ async def wake_up():
                 #     pass
 
         await bot.send_message(test_group, 'after search')
+        driver.quit()
 
     except Exception as e:
 
         await bot.send_message(test_group, e)
+        driver.quit()
 
         
 
