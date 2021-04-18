@@ -24,6 +24,7 @@ driver.implicitly_wait(4)
 URL = os.getenv('URL')
 URL2 = os.getenv('URL2')
 
+
 launch = True
 
 test_group = -1001153348142
