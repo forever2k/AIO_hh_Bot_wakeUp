@@ -138,13 +138,10 @@ async def wake_up():
                 #     pass
 
         await bot.send_message(test_group, 'after search')
-        driver.quit()
-
 
     except Exception as e:
 
         await bot.send_message(test_group, e)
-        driver.quit()
 
         
 
