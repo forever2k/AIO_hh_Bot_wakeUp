@@ -94,10 +94,10 @@ async def wake_up():
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('--disable-dev-sh-usage')
 
+        global driver
         driver = webdriver.Chrome(executable_path=os.environ.get('CHROMEDRIVER_PATH'), chrome_options=chrome_options)
         driver.implicitly_wait(4)
 
-        await asyncio.sleep(5)
 
         await bot.send_message(test_group, "Function Wake_up starts")
 
