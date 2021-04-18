@@ -12,14 +12,14 @@ import aioschedule
 from aiogram.utils.exceptions import BotBlocked
 
 
-# chrome_options = webdriver.ChromeOptions()
-# chrome_options.binary_location = os.environ.get('GOOGLE_CHROME_BIN')
-# chrome_options.add_argument('--headless')
-# chrome_options.add_argument('--no-sandbox')
-# chrome_options.add_argument('--disable-dev-sh-usage')
-#
-# driver = webdriver.Chrome(executable_path=os.environ.get('CHROMEDRIVER_PATH'), chrome_options=chrome_options)
-# driver.implicitly_wait(4)
+chrome_options = webdriver.ChromeOptions()
+chrome_options.binary_location = os.environ.get('GOOGLE_CHROME_BIN')
+chrome_options.add_argument('--headless')
+chrome_options.add_argument('--no-sandbox')
+chrome_options.add_argument('--disable-dev-sh-usage')
+
+driver = webdriver.Chrome(executable_path=os.environ.get('CHROMEDRIVER_PATH'), chrome_options=chrome_options)
+driver.implicitly_wait(4)
 
 URL = os.getenv('URL')
 URL2 = os.getenv('URL2')
@@ -87,17 +87,6 @@ async def start_res():
 async def wake_up():
 
     try:
-
-        chrome_options = webdriver.ChromeOptions()
-        chrome_options.binary_location = os.environ.get('GOOGLE_CHROME_BIN')
-        chrome_options.add_argument('--headless')
-        chrome_options.add_argument('--no-sandbox')
-        chrome_options.add_argument('--disable-dev-sh-usage')
-
-        global driver
-        driver = webdriver.Chrome(executable_path=os.environ.get('CHROMEDRIVER_PATH'), chrome_options=chrome_options)
-        driver.implicitly_wait(4)
-
 
         await bot.send_message(test_group, "Function Wake_up starts")
 
