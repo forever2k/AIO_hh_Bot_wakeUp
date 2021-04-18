@@ -97,7 +97,6 @@ async def wake_up():
         # driver = webdriver.Chrome(executable_path=os.environ.get('CHROMEDRIVER_PATH'), chrome_options=chrome_options)
         # driver.implicitly_wait(4)
 
-
         await bot.send_message(test_group, "Function Wake_up starts")
 
         driver.get(URL)
