@@ -11,7 +11,6 @@ import asyncio
 import aioschedule
 from aiogram.utils.exceptions import BotBlocked
 
-
 # chrome_options = webdriver.ChromeOptions()
 # chrome_options.binary_location = os.environ.get('GOOGLE_CHROME_BIN')
 # chrome_options.add_argument('--headless')
