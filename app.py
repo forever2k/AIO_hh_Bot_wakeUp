@@ -86,7 +86,7 @@ async def start_res():
 
 
 
-async def get_driver():
+def get_driver():
 
     chrome_options = webdriver.ChromeOptions()
     chrome_options.binary_location = os.environ.get('GOOGLE_CHROME_BIN')
@@ -108,7 +108,7 @@ async def wake_up():
         driver = False
 
         while driver is not True:
-            driver = await get_driver()
+            driver = get_driver()
 
         await bot.send_message(test_group, driver)
 
