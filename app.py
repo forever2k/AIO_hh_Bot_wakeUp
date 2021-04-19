@@ -58,7 +58,17 @@ async def main_start(message: types.Message):
 async def res(message: types.Message):
     await message.answer("RES AIO_Bot starts to work")
 
-    await wake_up()
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.binary_location = os.environ.get('GOOGLE_CHROME_BIN')
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--disable-dev-sh-usage')
+
+    driver = webdriver.Chrome(executable_path=os.environ.get('CHROMEDRIVER_PATH'), chrome_options=chrome_options)
+    driver.implicitly_wait(4)
+
+
+    await wake_up(driver)
 
 
 @dp.message_handler(commands=['res2'])
@@ -86,31 +96,10 @@ async def start_res():
 
 
 
-def get_driver():
-
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.binary_location = os.environ.get('GOOGLE_CHROME_BIN')
-    chrome_options.add_argument('--headless')
-    chrome_options.add_argument('--no-sandbox')
-    chrome_options.add_argument('--disable-dev-sh-usage')
-
-    driver = webdriver.Chrome(executable_path=os.environ.get('CHROMEDRIVER_PATH'), chrome_options=chrome_options)
-    driver.implicitly_wait(4)
-
-    return driver
-
-
-async def wake_up():
+async def wake_up(driver):
 
     try:
         await bot.send_message(test_group, "Function Wake_up starts")
-
-        driver = False
-
-        while driver is not True:
-            driver = get_driver()
-
-        await bot.send_message(test_group, driver)
 
         driver.get(URL)
 
