@@ -144,7 +144,7 @@ async def wake_up():
         driver.quit()
 
         
-
+#
 # loop = asyncio.new_event_loop()
 # asyncio.set_event_loop(loop)
 
