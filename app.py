@@ -84,7 +84,6 @@ async def start_res():
     await bot.send_message(me, "launch is True")
 
 
-
 async def wake_up():
 
     try:
