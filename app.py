@@ -102,6 +102,8 @@ async def wake_up():
 
         driver.get(URL)
 
+        await bot.send_message(test_group, URL)
+
         hh_cookies = os.environ.get('hh')
 
         testarray = ast.literal_eval(hh_cookies)
